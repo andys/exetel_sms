@@ -1,14 +1,12 @@
 
-exetel_sms:  Send and receive messages via Exetel's SMS API
------------------------------------------------------------
+h2. exetel_sms:  Send and receive messages via Exetel's SMS API
 
-require 'exetel_sms/sender'
-require 'exetel_sms/config'
+bc. require 'exetel_sms/sender'
+ require 'exetel_sms/config'
 
-Send a message:
---------------
+h3. Send a message:
 
- config = ExetelSms::Config.new('username', 'password')
+bc. config = ExetelSms::Config.new('username', 'password')
  sender = ExetelSms::Sender.new(config)
  result = sender.send(
    destination_mobile_number,
@@ -17,15 +15,14 @@ Send a message:
    sender.class.new_reference_number(reference_number)
  )
 
- if result[:status] == '1'
+bc. if result[:status] == '1'
   puts "Message sent successfully!"
  else
   puts "Error sending message: #{result[:notes]}"
  end
 
 
-Contact
--------
+h3. Contact
 
 Andrew Snow <andrew@modulus.org>
 Andys^ on irc.freenode.net
