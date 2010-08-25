@@ -6,7 +6,7 @@ bc. gem install 'exetel_sms'
 
 h3. Send a message:
 
-bc. require 'exetel_sms/config'
+bc. require 'exetel_sms'
  config = ExetelSms::Config.new('username', 'password')
  sender = ExetelSms::Sender.new(config)
  result = sender.send(
