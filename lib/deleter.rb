@@ -1,7 +1,4 @@
 
-require 'exetel_sms/client'
-require 'exetel_sms/class_methods'
-
 module ExetelSms
   
   class Deleter
@@ -16,7 +13,7 @@ module ExetelSms
       url = self.class.build_url(
         :username => @config.username,
         :password => @config.password,
-        :mobilenumber => from_mobile_number
+        :mobilenumber => from_mobile_number,
         :messageid => message_id
       )
       

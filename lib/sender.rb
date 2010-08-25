@@ -1,7 +1,4 @@
 
-require 'exetel_sms/client'
-require 'exetel_sms/class_methods'
-
 module ExetelSms
   
   class Sender
