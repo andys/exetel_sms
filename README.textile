@@ -14,8 +14,7 @@ bc. config = ExetelSms::Config.new('username', 'password')
    from_string,
    sender.class.new_reference_number(reference_number)
  )
-
-bc. if result[:status] == '1'
+ if result[:status] == '1'
   puts "Message sent successfully!"
  else
   puts "Error sending message: #{result[:notes]}"
