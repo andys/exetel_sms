@@ -1,23 +1,24 @@
 
 h2. exetel_sms:  Send and receive messages via Exetel's SMS API
 
-bc. require 'exetel_sms/sender'
- require 'exetel_sms/config'
+bc. gem install 'exetel_sms'
+ 
 
 h3. Send a message:
 
-bc. config = ExetelSms::Config.new('username', 'password')
+bc. require 'exetel_sms/config'
+ config = ExetelSms::Config.new('username', 'password')
  sender = ExetelSms::Sender.new(config)
  result = sender.send(
-   destination_mobile_number,
-   message,
-   from_string,
-   sender.class.new_reference_number(reference_number)
+   'destination mobile number',
+   'message',
+   'from string',
+   sender.class.new_reference_number('application_identifier')
  )
  if result[:status] == '1'
-  puts "Message sent successfully!"
+   puts "Message sent successfully!"
  else
-  puts "Error sending message: #{result[:notes]}"
+   puts "Error sending message: #{result[:notes]}"
  end
 
 
