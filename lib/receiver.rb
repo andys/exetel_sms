@@ -30,7 +30,7 @@ module ExetelSms
       end
 
       def exetel_url
-        'https://www.exetel.com.au/sendsms/api_sms_mvn_inbox.php?'
+        'https://smsgw.exetel.com.au/sendsms/api_sms_mvn_inbox.php?'
       end
 
     end

@@ -22,7 +22,7 @@ module ExetelSms
       
       self.class.response_to_hash(ExetelSms::Client.request(url))
     end
-    
+
     class << self
       
       def response_fields
@@ -34,7 +34,7 @@ module ExetelSms
       end
 
       def exetel_url
-        'https://www.exetel.com.au/sendsms/api_sms.php?'
+        'https://smsgw.exetel.com.au/sendsms/api_sms.php?'
         #username=xxxxxxxx&password=xxxxxxxx&mobilenumber=xxxxxxxx&message=xxxxxxxx&sender=xxxxxxxxx&messagetype=Text&referencenumber=xxxxxx'
       end
 

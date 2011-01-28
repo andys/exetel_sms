@@ -16,15 +16,32 @@ Send a message:
    'from string',
    sender.class.new_reference_number('application_identifier')
  )
- if result[:status] == '1'
+ if result.success?
    puts "Message sent successfully!"
  else
    puts "Error sending message: #{result[:notes]}"
  end
 
 
-Contact
--------
+
+Was it really sent?
+-------------------
+ retriever = ExetelSms::Retriever.new(config)
+ result = retriever.check_sent('reference_number')
+ result[:message_status]
+ => 'Sent'
+
+
+Receiving messages from a Virtual Mobile Number
+-----------------------------------------------
+ receiver = ExetelSms::Receiver.new(config)
+ if result = receiver.receive('my virtual mobile number')
+   puts "Received from #{result[:from_mobile_number]}: #{result[:message]}"
+ end
+ 
+
+Contact the author
+------------------
 
 Andrew Snow <andrew@modulus.org>
 Andys^ on irc.freenode.net

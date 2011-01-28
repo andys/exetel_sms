@@ -1,7 +1,7 @@
 
 module ExetelSms
   
-  class Deleter
+  class Retriever
     extend ExetelSms::ClassMethods
   
     attr_reader :config
@@ -9,29 +9,28 @@ module ExetelSms
       @config = config
     end
     
-    def delete(from_mobile_number, message_id)
+    def check_sent(reference_number)
       url = self.class.build_url(
         :username => @config.username,
         :password => @config.password,
-        :mobilenumber => from_mobile_number,
-        :messageid => message_id
+        :referencenumber => reference_number
       )
       
-      response_to_hash(ExetelSms::Client.request(url))
+      self.class.response_to_hash(ExetelSms::Client.request(url))
     end
     
     class << self
       
       def response_fields
-        [:status, :notes]
+        [:status, :exetel_id, :reference_number, :sender, :to_mobile_number, :received_at, :message_status, :charge, :notes]
       end
       
       def request_fields
-        [:username, :password, :mobilenumber, :messageid]
+        [:username, :password, :referencenumber]
       end
 
       def exetel_url
-        'https://smsgw.exetel.com.au/sendsms/api_sms_mvn_delete.php?'
+        'https://smsgw.exetel.com.au/sendsms/api_sms_detail.php?'
       end
 
     end

@@ -20,7 +20,7 @@ module ExetelSms
           body = response.body
         end
         raise "No body" unless body && body =~ /|/
-        body.chomp.gsub(/<br>$/i, '').split('|').map {|str| str.strip }
+        body.chomp.gsub(/<br>$/i, '').split('|',-1).map {|str| str.strip }
       end
     end
   end
