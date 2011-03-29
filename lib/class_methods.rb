@@ -30,6 +30,9 @@ module ExetelSms
       URI.encode(URI.encode(str), /=|&|\?/)
     end
     
+    def matchurl?(url)
+      url.match(/\/#{api_path}\?/)
+    end
     
     def response_to_hash(fields)
       raise "Missing fields in response body?  Expected #{response_fields.map(&:to_s).join(',')}, got #{fields.inspect}" unless fields.length >= response_fields.length

@@ -51,13 +51,13 @@ bc. checker = ExetelSms::CreditCheck.new(config)
 h3. Test API: test responses without making actual HTTP calls
 
 bc. good = ExetelSms::Client.with_test_api { retriever.check_sent('1') }
- good[:message_status] # => 'Delivered'
+good[:message_status] #=> 'Delivered'
 
 bc. bad = ExetelSms::Client.with_test_api(:fail) { retriever.check_sent('1') }
- bad[:message_status] # => 'Failed'
+bad[:message_status]  #=> 'Failed'
 
+Sent messages end up in ExetelSms::Client.sent_messages array. See test/ for more examples.
 
-See test/ for more examples
 
 
 h3. Contact the author

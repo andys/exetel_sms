@@ -29,8 +29,21 @@ class TestExetelSms < Test::Unit::TestCase
   end
   
   def test_sender_ok
+    assert_equal 0, ExetelSms::Client.sent_messages.length
+
     result = ExetelSms::Client.with_test_api { @sender.send('0412345678', 'Hello?', '0412987654', '1') }
     assert result.success?
+    assert_equal 1, ExetelSms::Client.sent_messages.length
+    
+    request = ExetelSms::Client.sent_messages.first
+    
+    assert_equal '0412345678', request[:mobilenumber]
+    assert_equal '0412987654', request[:sender]
+    assert_equal '1', request[:referencenumber]
+    assert_equal 'Text', request[:messagetype]
+    assert_equal 'Hello?', request[:message]
+    assert_equal 'username', request[:username]
+    assert_equal 'password', request[:password]
   end
 
   def test_sender_exception

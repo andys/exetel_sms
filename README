@@ -62,8 +62,8 @@ Test API - test responses without making actual HTTP calls
  bad = ExetelSms::Client.with_test_api(:fail) { retriever.check_sent('1') }
  bad[:message_status] # => 'Failed'
 
-See test/ for more examples
- 
+Sent messages end up in ExetelSms::Client.sent_messages array. See test/ for more examples. 
+
 
 Contact the author
 ------------------

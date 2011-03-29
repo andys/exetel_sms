@@ -9,8 +9,8 @@ module ExetelSms
       @config = config
     end
 
-    def send(to_mobile_number, msg, from_mobile_number, reference_number)
-      url = self.class.build_url(
+    def send_request_hash(to_mobile_number, msg, from_mobile_number, reference_number)
+      {
         :username => @config.username,
         :password => @config.password,
         :sender => from_mobile_number,
@@ -18,8 +18,11 @@ module ExetelSms
         :messagetype => 'Text',
         :referencenumber => reference_number,
         :mobilenumber => to_mobile_number
-      )
-      
+      }
+    end
+
+    def send(to_mobile_number, msg, from_mobile_number, reference_number)
+      url = self.class.build_url(send_request_hash(to_mobile_number, msg, from_mobile_number, reference_number))
       self.class.response_to_hash(ExetelSms::Client.request(url))
     end
 
