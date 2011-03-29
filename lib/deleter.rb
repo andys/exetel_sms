@@ -17,11 +17,10 @@ module ExetelSms
         :messageid => message_id
       )
       
-      response_to_hash(ExetelSms::Client.request(url))
+      self.class.response_to_hash(ExetelSms::Client.request(url))
     end
     
     class << self
-      
       def response_fields
         [:status, :notes]
       end
@@ -30,10 +29,9 @@ module ExetelSms
         [:username, :password, :mobilenumber, :messageid]
       end
 
-      def exetel_url
-        'https://smsgw.exetel.com.au/sendsms/api_sms_mvn_delete.php?'
+      def api_path
+        'api_sms_mvn_delete.php'
       end
-
     end
   end
 end

@@ -37,12 +37,34 @@ bc. receiver = ExetelSms::Receiver.new(config)
  if result = receiver.receive('my virtual mobile number')
    puts "Received from #{result[:from_mobile_number]}: #{result[:message]}"
  end
- 
 
+Then you can delete the messages with ExetelSms::Deleter
+
+h3. Credit Check: also useful as a ping before sending
+
+bc. checker = ExetelSms::CreditCheck.new(config)
+ if result = checker.get_credit_limit
+   puts "Credit limit is #{result[:limit}}"
+ end
+
+
+h3. Test API: test responses without making actual HTTP calls
+
+bc. good = ExetelSms::Client.with_test_api { retriever.check_sent('1') }
+ good[:message_status] # => 'Delivered'
+
+bc. bad = ExetelSms::Client.with_test_api(:fail) { retriever.check_sent('1') }
+ bad[:message_status] # => 'Failed'
+
+
+See test/ for more examples
 
 
 h3. Contact the author
 
 Andrew Snow <andrew@modulus.org>
 Andys^ on irc.freenode.net
+@andy_snow on Twitter
+
+
 

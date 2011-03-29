@@ -9,5 +9,6 @@ module ExetelSms
       @password = password
       @mvn = mvn
     end  
+    
   end
 end

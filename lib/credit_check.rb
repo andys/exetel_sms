@@ -1,7 +1,7 @@
 
 module ExetelSms
   
-  class Receiver
+  class CreditCheck
     extend ExetelSms::ClassMethods
   
     attr_reader :config
@@ -9,30 +9,27 @@ module ExetelSms
       @config = config
     end
     
-    def receive(from_mobile_number)
+    def get_credit_limit
       url = self.class.build_url(
         :username => @config.username,
-        :password => @config.password,
-        :mobilenumber => from_mobile_number
+        :password => @config.password
       )
       
       self.class.response_to_hash(ExetelSms::Client.request(url))
     end
     
     class << self
-      
       def response_fields
-        [:status, :exetel_id, :from_mobile_number, :received_at, :notes, :message]
+        [:status, :limit, :notes]
       end
       
       def request_fields
-        [:username, :password, :mobilenumber]
+        [:username, :password]
       end
 
       def api_path
-        'api_sms_mvn_inbox.php'
+        'api_sms_credit.php'
       end
-
     end
   end
 end

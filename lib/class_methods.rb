@@ -2,7 +2,17 @@
 require 'uri'
 
 module ExetelSms
+  module ResultHashMethods
+    def success?
+      self[:status] == '1'
+    end
+  end
+
   module ClassMethods
+    def exetel_url
+      "https://smsgw.exetel.com.au/sendsms/#{api_path}?"
+    end
+  
     def new_reference_number(ident='')
       @@counter ||= 0
       @@counter += 1
@@ -20,17 +30,13 @@ module ExetelSms
       URI.encode(URI.encode(str), /=|&|\?/)
     end
     
+    
     def response_to_hash(fields)
       raise "Missing fields in response body?  Expected #{response_fields.map(&:to_s).join(',')}, got #{fields.inspect}" unless fields.length >= response_fields.length
       ret = {}
       response_fields.each {|field| ret[field] = fields.shift }
       ret[:other] = fields
-      class << ret
-        def success?
-          self[:status] == '1'
-        end
-      end
-      ret
+      ret.extend ResultHashMethods
     end
       
   end

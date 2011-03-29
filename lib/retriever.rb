@@ -8,7 +8,7 @@ module ExetelSms
     def initialize(config)
       @config = config
     end
-    
+
     def check_sent(reference_number)
       url = self.class.build_url(
         :username => @config.username,
@@ -29,8 +29,8 @@ module ExetelSms
         [:username, :password, :referencenumber]
       end
 
-      def exetel_url
-        'https://smsgw.exetel.com.au/sendsms/api_sms_detail.php?'
+      def api_path
+        'api_sms_detail.php'
       end
 
     end
