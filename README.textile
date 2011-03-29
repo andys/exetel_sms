@@ -44,7 +44,7 @@ h3. Credit Check: also useful as a ping before sending
 
 bc. checker = ExetelSms::CreditCheck.new(config)
  if result = checker.get_credit_limit
-   puts "Credit limit is #{result[:limit}}"
+   puts "Credit limit is #{result[:limit]}"
  end
 
 
