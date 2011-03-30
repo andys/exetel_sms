@@ -24,8 +24,8 @@ module ExetelSms
       def parse_url_params(url)
         Hash[
           *url.split('?').last.split('&').map do |pair|
-            str1, str2 = pair.split('=')
-            [URI.decode(str1).to_sym, URI.decode(str2)]
+            str1, str2 = pair.split('=',-1)
+            [URI.decode(str1.to_s).to_sym, URI.decode(str2.to_s)]
           end.flatten
         ]
       end

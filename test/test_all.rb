@@ -14,8 +14,13 @@ class TestExetelSms < Test::Unit::TestCase
   end
   
   def teardown
+    ExetelSms::Client.sent_messages.clear
   end
-  
+
+  def test_missing_params
+    assert ExetelSms::Client.with_test_api { @sender.send('', nil, '', '') }.success?
+  end
+
   def test_credit_check_ok
     result = ExetelSms::Client.with_test_api { @credit_check.get_credit_limit }
     assert result.success?
